@@ -10,7 +10,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-BACKEND_URL = "https://ai-resume-builder-umwu.onrender.com"   # ← update when backend is live
+BACKEND_URL = "https://ai-resume-builder-umwu.onrender.com/generate"   # ← update when backend is live
 
 # ── Custom CSS ────────────────────────────────────────────────────────────────
 st.markdown("""
