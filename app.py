@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import traceback
 
 from skill_matcher import suggest_skills
 from summary_generator import generate_summary
@@ -69,6 +70,7 @@ def generate_resume():
 
     except Exception as e:
         print("ERROR:", e)
+        print(traceback.format_exc())
         return jsonify({"error": str(e)}), 500
 
 
