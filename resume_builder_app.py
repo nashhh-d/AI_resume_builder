@@ -287,7 +287,7 @@ if generate:
         st.markdown(f'<div class="result-box">{summary}</div>', unsafe_allow_html=True)
 
     st.markdown("## 📥 Download Your Resume")
-    dl1, dl2 = st.columns(2)
+    dl1, dl2, dl3 = st.columns(3)
 
     with dl1:
         pdf_b64 = result.get("download_pdf", "")
@@ -298,6 +298,7 @@ if generate:
                 file_name=f"{full_name.replace(' ', '_')}_Resume.pdf",
                 mime="application/pdf",
                 use_container_width=True,
+                help="Standard PDF generated with ReportLab",
             )
         else:
             st.info("PDF not available.")
@@ -311,9 +312,24 @@ if generate:
                 file_name=f"{full_name.replace(' ', '_')}_Resume.docx",
                 mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                 use_container_width=True,
+                help="Editable Word document",
             )
         else:
             st.info("DOCX not available.")
+
+    with dl3:
+        latex_b64 = result.get("download_latex_pdf", "")
+        if latex_b64:
+            st.download_button(
+                label="⬇️ Download LaTeX PDF",
+                data=base64.b64decode(latex_b64),
+                file_name=f"{full_name.replace(' ', '_')}_Resume_LaTeX.pdf",
+                mime="application/pdf",
+                use_container_width=True,
+                help="Polished PDF compiled from LaTeX",
+            )
+        else:
+            st.info("LaTeX PDF not available.")
 
     with st.expander("🔍 Raw API Response (debug)"):
         st.json(result)
